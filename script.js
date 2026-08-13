@@ -3,7 +3,7 @@
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var WA_NUMBER = "77010889998";
+  var WA_NUMBER = "77712678988";
 
   /* ---------- intro: start hero animations once page is ready ---------- */
   window.addEventListener("load", function () {
