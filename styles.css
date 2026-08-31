@@ -106,6 +106,13 @@ body::before{
   box-shadow:0 1px 0 rgba(216,219,224,.08);
   padding-top:.55rem; padding-bottom:.55rem;
 }
+/* тёмная подложка вверху страницы, чтобы шапка не сливалась со светлым hero */
+.hdr::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(8,9,11,.72) 0%, rgba(8,9,11,.34) 55%, transparent 100%);
+  transition:opacity .4s;
+}
+.hdr.scrolled::before{ opacity:0; }
 .brand{ display:inline-flex; align-items:center; gap:.6rem; z-index:70; }
 .brand-mark{ width:2.1rem; height:2.1rem; flex:none; }
 .brand-word{
@@ -119,7 +126,8 @@ body::before{
 }
 .hdr-nav{ display:none; gap:2rem; }
 .hdr-nav a{
-  font-size:.9rem; font-weight:600; color:var(--mut);
+  font-size:.9rem; font-weight:600; color:#cfd3d9;
+  text-shadow:0 1px 3px rgba(0,0,0,.45);
   transition:color .3s; position:relative;
 }
 .hdr-nav a::after{
