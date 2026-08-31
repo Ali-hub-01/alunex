@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ali-hub-01.github.io/alunex/sitemap.xml
+Sitemap: https://alunex.kz/sitemap.xml
