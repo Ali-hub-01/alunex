@@ -5,6 +5,23 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var WA_NUMBER = "77712678988";
 
+  /* ---------- Google Ads конверсии (AW-18420441912) ---------- */
+  var CONV_FORM  = "AW-18420441912/6NmUCLzJ5-scELjGxs9E"; // Отправка формы для лидов
+  var CONV_WA    = "AW-18420441912/e3AMCNSw8-scELjGxs9E"; // Контакт (клик WhatsApp)
+  var CONV_PHONE = "AW-18420441912/yPKWCKTA5-scELjGxs9E"; // Интерактивные номера (клик по тел)
+  function fireConv(sendTo) {
+    if (typeof gtag === "function") {
+      gtag("event", "conversion", { send_to: sendTo, value: 1.0, currency: "USD" });
+    }
+  }
+  /* Делегированные клики по WhatsApp и телефону = конверсии */
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="wa.me"], a[href^="tel:"]');
+    if (!a) return;
+    if (a.getAttribute("href").indexOf("tel:") === 0) fireConv(CONV_PHONE);
+    else fireConv(CONV_WA);
+  });
+
   /* ---------- intro: start hero animations once page is ready ---------- */
   window.addEventListener("load", function () {
     document.body.classList.add("loaded");
@@ -123,7 +140,11 @@
       ];
       if (comment) lines.push("Комментарий: " + comment);
       var url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
-      window.open(url, "_blank", "noopener");
+      /* Google Ads: конверсия отправки формы — фиксируем ДО перехода */
+      fireConv(CONV_FORM);
+      /* Открываем WhatsApp; при блокировке попапа на мобиле — в этой же вкладке */
+      var win = window.open(url, "_blank");
+      if (!win) window.location.href = url;
     });
   }
 
